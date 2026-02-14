@@ -5,10 +5,10 @@ import wikipedia
 import webbrowser
 import os
 
-# Initialize the speech engine
-engine = pyttsx3.init('sapi5') # 'sapi5' is for windows.
+
+engine = pyttsx3.init('sapi5') 
 voices = engine.getProperty('voices')
-# Set voice (0 is usually male/David, 1 is usually female/zira)
+
 engine.setProperty('voice', voices[1].id)
 
 def speak(audio):
@@ -33,7 +33,7 @@ def take_command():
     with sr.Microphone() as source:
         print("Listening...")
         r.pause_threshold = 1
-        # Adjust for ambient noise
+       
         r.adjust_for_ambient_noise(source)
         try:
             audio = r.listen(source, timeout=5, phrase_time_limit=5)
@@ -48,9 +48,9 @@ def take_command():
 def main():
     wish_me()
     while True:
-        # Convert query to lower case to make logic matching easier
+       
         query = take_command().lower()
-        # Logic for executing tasks based on query
+      
         if 'wikipedia' in query:
             speak('Searching wikipedia...')
             query = query.replace("wikipedia", "")
@@ -68,7 +68,7 @@ def main():
             strTime = datetime.datetime.now().strftime("%H:%M:%S")
             speak(f"Sir, the time is {strTime}")                           
         elif 'open code' in query:
-            #change this path to where your vs code or editor is instaaled.
+         
             codePath = "C:\\Users\\YourUser\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe"
             try:
                 os.startfile(codePath)
@@ -78,6 +78,6 @@ def main():
             speak("Good Bye Sir.")
             break
 
-# --- Main Program Execution ---
+
 if __name__ == "__main__":
     main()
